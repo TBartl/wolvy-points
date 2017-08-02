@@ -1,0 +1,2 @@
+# Back end modules should be installed through npm install
+node_modules/

@@ -1,0 +1,24 @@
+{
+  "name": "12-slack",
+  "version": "1.0.0",
+  "description": "*Wolvy Points*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "slackbots": "^1.0.2"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TBartl/wolvy-points.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TBartl/wolvy-points/issues"
+  },
+  "homepage": "https://github.com/TBartl/wolvy-points#readme"
+}
