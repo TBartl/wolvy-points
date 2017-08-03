@@ -5,12 +5,6 @@ var fs = require('fs');
 // git push heroku master
 // heroku ps:scale web=1
 
-
-var http = require("http");
-setInterval(function() {
-    http.get("http://<your app name>.herokuapp.com");
-}, 300000); // 
-
 var commands = {};
 var commandsPath = __dirname + "/commands/";
 var commandFiles = fs.readdirSync(commandsPath);
