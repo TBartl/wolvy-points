@@ -19,7 +19,7 @@ var token = "";
 
 var tokenFilePath = __dirname + "/token.txt";
 if (fs.existsSync(tokenFilePath))
-    token = fs.readFileSync(, "utf8");
+    token = fs.readFileSync(tokenFilePath, "utf8");
 else if (process.env.SLACK_TOKEN)
     token = process.env.SLACK_TOKEN;
 
