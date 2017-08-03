@@ -2,6 +2,10 @@ var SlackBot = require('slackbots');
 var path = require('path');
 var fs = require('fs');
 
+// git push heroku master
+// heroku ps:scale web=1
+
+
 var http = require("http");
 setInterval(function() {
     http.get("http://<your app name>.herokuapp.com");
