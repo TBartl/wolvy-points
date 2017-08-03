@@ -1,6 +1,6 @@
 module.exports.run = function (data) {
     if (data.words.length <= 2) {
-        var byRestriction = {};
+        var byRestriction = { "None": [], "User": [], "Admin": [] };
         var message = "The following commands are currently implemented. Note that some commands are restricted to certain users. Type \"wp help <command>\" for more information about that command.\n";
         Object.keys(data.commands).forEach(function (key) {
             var restriction = data.commands[key].restriction;

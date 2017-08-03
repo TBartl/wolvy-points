@@ -3,7 +3,13 @@ var mysteryBoxes = [{
     "desc": [
         "*Friendship*: All users gain +5 WP, courtesy of you!",
         "*Gifter*: Once per day, you can now gift a user +2 WP by typing \"wolvy-points gift <name>\""
-    ]
+    ],
+    "func" : function(data) {
+        var message = "wp print ";
+        Object.keys(data.saveData.users).forEach(function(userName) {
+            
+        }, this);
+    }
 }]
 
 module.exports.run = function (data) {

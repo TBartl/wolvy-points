@@ -5,7 +5,7 @@ var fs = require('fs');
 var days = []
 var users = []
 
-var text = fs.readFileSync("./overTime.txt", "utf-8");
+var text = fs.readFileSync("./standingsOverTime.txt", "utf-8");
 var lines = text.split(/\r?\n/);
 
 lines.forEach(function (line) {
@@ -43,4 +43,4 @@ users.forEach(function (user) {
     text += line + '\n';
 }, this);
 
-fs.writeFileSync("./overTime.csv",text);
+fs.writeFileSync("./standingsOverTime.csv",text);

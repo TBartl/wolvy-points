@@ -14,7 +14,7 @@ for (var i in commandFiles) {
 // console.log(commands);
 // create a bot https://my.slack.com/services/new/bot
 var bot = new SlackBot({
-    token: 'xoxb-212739730822-n7986brMlMZF1JSx8mPjujza',
+    token: 'xoxb-212739730822-VGyaAugftSnOczs3zojIvh8K',
     // name: 'El Wolvyo Pointso'
     name: 'ウルヴァリンポイント'
     // name: 'sʇuᴉoԀ ʎʌloM'
@@ -41,10 +41,11 @@ bot.on('start', function () {
 });
 
 bot.on('message', function (data) {
+    
     if (data.type != "message")
         return;
-
-    // console.log(data);
+    console.log(data);
+    
 
     var words = data.text.split(" ");
     if (words.length <= 1)
@@ -60,7 +61,7 @@ bot.on('message', function (data) {
         bot.getGroupById(data.channel).then(function (getGroupByIdData) {
             var userName = getUserByIdData.name;
             var groupName = getGroupByIdData.name;
-            runCommand(userName, groupName, data.text);
+            // runCommand(userName, groupName, data.text);
         }, defaultErrorHandler);
     }, defaultErrorHandler);
 });

@@ -1,2 +1,7 @@
 # Back end modules should be installed through npm install
 node_modules/
+
+.vs/
+
+standingsOverTime.json
+standingsOverTime.csv
