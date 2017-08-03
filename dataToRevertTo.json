@@ -1,1 +1,50 @@
-{"users":{"tbartl":{"points":37,"spent":40,"nextRob":3},"shesanth":{"points":121,"spent":80,"nextRob":3},"sleepingbooty":{"points":57,"spent":0},"cyan":{"points":4,"spent":0},"branden":{"points":1,"spent":40,"nextGift":3},"hkawoosa":{"points":11,"spent":40,"nextRob":3,"nextGift":2},"acerio":{"points":96,"spent":0},"seskanda":{"points":48,"spent":0},"dbraunst":{"points":8,"spent":40}},"printed":583,"spent":240,"nextFactBonus":2}
+{
+    "users": {
+        "tbartl": {
+            "points": 37,
+            "spent": 40,
+            "isAdmin": true
+        },
+        "shesanth": {
+            "points": 121,
+            "spent": 80,
+            "isAdmin": true,
+            "isRobber": true
+        },
+        "sleepingbooty": {
+            "points": 57,
+            "spent": 0
+        },
+        "cyan": {
+            "points": 4,
+            "spent": 0
+        },
+        "branden": {
+            "points": 1,
+            "spent": 40,
+            "isGifter": true
+        },
+        "hkawoosa": {
+            "points": 11,
+            "spent": 40,
+            "isGifter": true,
+            "isRobber": true
+        },
+        "acerio": {
+            "points": 96,
+            "spent": 0
+        },
+        "seskanda": {
+            "points": 48,
+            "spent": 0
+        },
+        "dbraunst": {
+            "points": 8,
+            "spent": 40,
+            "isAdmin": true
+        }
+    },
+    "printed": 583,
+    "spent": 240,
+    "nextFactBonus": 2
+}

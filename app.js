@@ -14,7 +14,7 @@ for (var i in commandFiles) {
 // console.log(commands);
 // create a bot https://my.slack.com/services/new/bot
 var bot = new SlackBot({
-    token: 'xoxb-212739730822-VGyaAugftSnOczs3zojIvh8K',
+    token: 'xoxb-212739730822-eiCvMQicpX4MbFIzdF35nPyH',
     // name: 'El Wolvyo Pointso'
     name: 'ウルヴァリンポイント'
     // name: 'sʇuᴉoԀ ʎʌloM'
@@ -42,10 +42,10 @@ bot.on('start', function () {
 
 bot.on('message', function (data) {
     
+    // console.log(data);
+
     if (data.type != "message")
-        return;
-    console.log(data);
-    
+        return;    
 
     var words = data.text.split(" ");
     if (words.length <= 1)
@@ -61,7 +61,7 @@ bot.on('message', function (data) {
         bot.getGroupById(data.channel).then(function (getGroupByIdData) {
             var userName = getUserByIdData.name;
             var groupName = getGroupByIdData.name;
-            // runCommand(userName, groupName, data.text);
+            runCommand(userName, groupName, data.text);
         }, defaultErrorHandler);
     }, defaultErrorHandler);
 });
@@ -80,7 +80,7 @@ function runCommand(userName, groupName, text) {
             "words": words,
             "message": text,
             "postMessage": function (message) {
-                console.log(message);
+                // console.log(message);
                 if (saveData.users[userName] && saveData.users[userName].isPremium)
                     bot.postMessageToGroup(groupName, message, {
                         icon_emoji: ':rainbow_wolvy:'

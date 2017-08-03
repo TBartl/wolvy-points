@@ -4,11 +4,59 @@ var mysteryBoxes = [{
         "*Friendship*: All users gain +5 WP, courtesy of you!",
         "*Gifter*: Once per day, you can now gift a user +2 WP by typing \"wolvy-points gift <name>\""
     ],
-    "func" : function(data) {
-        var message = "wp print ";
-        Object.keys(data.saveData.users).forEach(function(userName) {
-            
+    "func": function (data) {
+        var command = "wp print ";
+        var amount = 5
+        Object.keys(data.saveData.users).forEach(function (userName) {
+            command += userName + " " + amount + " ";
         }, this);
+        data.runCommand('tbartl', data.groupName, command);
+        data.saveData.users[data.userName].isGifter = true;
+    }
+}, {
+    "name": "Political Mystery Box",
+    "desc": [
+        "*Admin*: Your account has been granted admin permissions, but don't abuse it or you'll lose it!",
+        "*Man of the People/Corrupt Politician*: Choose to either gain the ability to rob or gift (requires admin to verify)."
+    ],
+    "func": function (data) {
+        data.saveData.users[data.userName].isAdmin = true;
+    }
+}, {
+    "name": "Enemy for Life Box",
+    "desc": [
+        "*Cash Now*: Gain 15 WP from another random user.",
+        "*Payback*: The same random user gains the ability to rob."
+    ],
+    "func": function (data) {
+        data.saveData.users[data.userName].isAdmin = true;
+
+        var allUsers = [];
+        Object.keys(data.saveData.users).forEach(function (key) {
+            allUsers.push(key);
+        }, this);
+        var randUserName = allUsers[Math.floor(allUsers.length * Math.random())];
+        data.runCommand('tbartl', data.groupName, "wp print " + data.userName + " 15 " + randUserName + " -15");
+        data.saveData.users[randUserName].isRobber = true;
+        data.postMessage(data.userName + " is enemies lovers with " + randUserName);
+    }
+}, {
+    "name": "Lovers Mystery Box",
+    "desc": [
+        "*Gifter*: Gain the ability to gift.",
+        "*Random Gifter*: Another random user has also gained the ability to gift."
+    ],
+    "func": function (data) {
+        data.saveData.users[data.userName].isAdmin = true;
+
+        var allUsers = [];
+        Object.keys(data.saveData.users).forEach(function (key) {
+            allUsers.push(key);
+        }, this);
+        data.saveData.users[data.userName].isGifter = true;
+        var randUserName = allUsers[Math.floor(allUsers.length * Math.random())];
+        data.saveData.users[randUserName].isGifter = true;
+        data.postMessage(data.userName + " is lovers with " + randUserName);
     }
 }]
 
@@ -56,6 +104,7 @@ module.exports.run = function (data) {
         var boxIndex = Math.floor(Math.random() * mysteryBoxes.length);
         var box = mysteryBoxes[boxIndex];
         message += postMysteryBox(box, data);
+        setTimeout(function(){box.func(data);}, 2000);
 
     } else if (amount == 100) {
         message += userName + " has disabled automatic Wolvy Facts :rip:\nBy disabling automatic Wolvy Facts you have enabled manual Wolvy Facts. Users can now type \"wolvy-points fact\" to get a random Wolvy Fact. To incentivize this, the first person to request a Wolvy Fact each day will recieve a bonus 1 WP.";
