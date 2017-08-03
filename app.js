@@ -20,12 +20,14 @@ for (var i in commandFiles) {
     commands[name.toLowerCase()] = require(commandsPath + fileName);
 }
 
+var token = fs.readFileSync(__dirname + "/token.txt", "utf8");
+
 // console.log(commands);
 // create a bot https://my.slack.com/services/new/bot
 var bot = new SlackBot({
-    token: 'xoxb-212739730822-eiCvMQicpX4MbFIzdF35nPyH',
+    "token": token,
     // name: 'El Wolvyo Pointso'
-    name: 'ウルヴァリンポイント'
+    "name": 'ウルヴァリンポイント'
     // name: 'sʇuᴉoԀ ʎʌloM'
     // name: 'Hanna Kawoosa'
     // name: 'Sheshanth Ramakrishnan'
