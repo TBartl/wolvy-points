@@ -20,7 +20,14 @@ for (var i in commandFiles) {
     commands[name.toLowerCase()] = require(commandsPath + fileName);
 }
 
-var token = fs.readFileSync(__dirname + "/token.txt", "utf8");
+
+var token = "";
+
+var tokenFilePath = __dirname + "/token.txt";
+if (fs.existsSync(tokenFilePath))
+    token = fs.readFileSync(, "utf8");
+else if (process.env.SLACK_TOKEN)
+    token = process.env.SLACK_TOKEN;
 
 // console.log(commands);
 // create a bot https://my.slack.com/services/new/bot
