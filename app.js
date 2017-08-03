@@ -25,14 +25,17 @@ else if (process.env.SLACK_TOKEN)
 
 // console.log(commands);
 // create a bot https://my.slack.com/services/new/bot
-var bot = new SlackBot({
+
+var botParams = {
     "token": token,
     // name: 'El Wolvyo Pointso'
     "name": 'ウルヴァリンポイント'
     // name: 'sʇuᴉoԀ ʎʌloM'
     // name: 'Hanna Kawoosa'
     // name: 'Sheshanth Ramakrishnan'
-});
+}
+
+var bot = new SlackBot(botParams);
 
 var params = {
     icon_emoji: ':wolvy:'
@@ -128,6 +131,7 @@ function defaultErrorHandler(err) {
 var http = require("http");
 setInterval(function() {
     http.get("http://radiant-sea-14907.herokuapp.com");
+    bot = new SlackBot(botParams);
 }, 300000); // every 5 minutes
 
 // function choiceMysteryBox(userName, channel) {
