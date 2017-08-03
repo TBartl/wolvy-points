@@ -2,6 +2,11 @@ var SlackBot = require('slackbots');
 var path = require('path');
 var fs = require('fs');
 
+var http = require("http");
+setInterval(function() {
+    http.get("http://<your app name>.herokuapp.com");
+}, 300000); // 
+
 var commands = {};
 var commandsPath = __dirname + "/commands/";
 var commandFiles = fs.readdirSync(commandsPath);
@@ -113,6 +118,10 @@ function defaultErrorHandler(err) {
 }
 
 
+var http = require("http");
+setInterval(function() {
+    http.get("http://radiant-sea-14907.herokuapp.com");
+}, 300000); // every 5 minutes
 
 // function choiceMysteryBox(userName, channel) {
 //     bot.postMessageToGroup(channel, userName + " has purchased a mystery box! The mystery box is: \"Tough Choice Mystery Box\". Let's see what's inside!\n1)Either gain 50 WP, or give everyone 10 WP (90 WP total).\n2) Admin: Your account has been granted wolvy-points admin rights, but don't abuse it or you'll lose it!\n3) Early Access Pass: You have been invited to #test-channel, the testing grounds for wolvy-points!\n...and remember kids, you too could earn some awesome prizes by purchasing a Mystery Box for only 40 WP!", {
