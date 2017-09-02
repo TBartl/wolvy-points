@@ -14,7 +14,6 @@ for (var i in commandFiles) {
     commands[name.toLowerCase()] = require(commandsPath + fileName);
 }
 
-
 var token = "";
 
 var tokenFilePath = __dirname + "/token.txt";
@@ -23,7 +22,6 @@ if (fs.existsSync(tokenFilePath))
 else if (process.env.SLACK_TOKEN)
     token = process.env.SLACK_TOKEN;
 
-// console.log(commands);
 // create a bot https://my.slack.com/services/new/bot
 
 var botParams = {
@@ -31,36 +29,57 @@ var botParams = {
     // name: 'El Wolvyo Pointso'
     "name": 'ウルヴァリンポイント'
     // name: 'sʇuᴉoԀ ʎʌloM'
-    // name: 'Hanna Kawoosa'
-    // name: 'Sheshanth Ramakrishnan'
 }
 
 var bot = new SlackBot(botParams);
 
 var params = {
     icon_emoji: ':wolvy:'
-
-    // Hanna
-    // icon_url: 'https://ca.slack-edge.com/T2PHQRXPU-U2PMDBSDB-1bdf0476856a-48'
-
-    // Shesanth
-    // icon_url: 'https://ca.slack-edge.com/T2PHQRXPU-U2ZKZ0ULC-32b82d8974e6-48'
 };
 
 var saveData = JSON.parse(fs.readFileSync(path.join(__dirname + "/data.json")));
 
 bot.on('start', function () {
     var message = "";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know wolverines can climb trees?. While wolverines sleep, hunt and give birth on the ground, the can also climb trees just like some bears. They can do this because of their long, sharp hook-like claws, which they also use to climb sheer cliffs, icefalls and snowy peaks.";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know wolverines can climb trees?. While wolverines sleep, hunt and give birth on the ground, the can also climb trees just like some bears. They can do this because of their long, sharp hook-like claws, which they also use to climb sheer cliffs, icefalls and snowy peaks.";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know that like the skunk, the wolverine has a strong-smelling fluid called musk which the wolverine uses to warn others to stay away..";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know that unlike most members of the weasel family, wolverines have a particularly heavy set of fur that allows that to survive in the coldest storms. Speaking of storms, you should all check out Heroes of the Storm; An exciting new game featuring all of your favorite Blizzard characters from Warcraft, Starcraft, Diablo, and Overwatch. As a bonus promotion, if you play now you'll have access to the Nexus 2.0 challenge where you can unlock awesome loot that crossovers into your other favorite Blizzard App Games. So grab your friend, sign up at www.heroesofthestorm.com and we'll see you, in the nexus. "    
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know that like some Wolverine Soft members, real wolverines are awfully smelly? One Native American tribe calls wolverines \"skunk bear.\" The stench comes from special anal glands that allow the animals to emit an offensive odor that protects their food and marks their territory (they'll also use it when threatened, raising their tails like skunks). The fragrant odor has traces of methylbutanoic acid (think smelly cheese), methyldecanoic acid, and phenylacetic acid, and has a composition similar to that of smaller members of the weasel family, pine and beech martens.";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know that despite its large size, the wolverine has a number of predators? The mountain lion, wolf, and bear are predators of the wolverine. However, the human is recognized as the primary predator of the wolverine.";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know that wolverineaccess.com is a fucking garbage piece of shit like seriously whatever subhuman decided that this pile of shit is good enough should be exterminated on the spot. If I ever get a request to donate to the school I'm going to send them back a message saying \"You should have fixed this broken piece of crap\" because the school obviously doesn't care about us students (and also because I'm never giving my hard earned cash to those money-grubbing animals).";
+    // message = "Hey kids, it's time for another fun Wolvy Fact! Did you know .";
+
+    // message = "You think this is some sort of democracy?.";
+    // params = {
+    //     icon_emoji: ":angrthomas:"
+    // }
+    // message = "For a limited time, the next mystery box will cost just 0 WP!";
     if (message != "")
         bot.postMessageToGroup("officer-meme", message, params);
+
+    if (isReadyForStart()) {
+        bot.postMessageToGroup("officer-meme", "Hey kids, Wolvy Points is now online!", params);
+    }
 });
 
+function isReadyForStart() {
+    var currentDate = new Date();
+    var currentDay = currentDate.getDay();
+    if (saveData.nextAnnounceOnline == undefined || saveData.nextAnnounceOnline != currentDay) {
+        saveData.nextAnnounceOnline = currentDay;
+        save();
+        return true;
+    }
+    return false;
+}
+
 bot.on('message', function (data) {
-    
+
     // console.log(data);
 
     if (data.type != "message")
-        return;    
+        return;
 
     var words = data.text.split(" ");
     if (words.length <= 1)
@@ -76,12 +95,12 @@ bot.on('message', function (data) {
         bot.getGroupById(data.channel).then(function (getGroupByIdData) {
             var userName = getUserByIdData.name;
             var groupName = getGroupByIdData.name;
-            runCommand(userName, groupName, data.text);
+            runCommand(userName, groupName, data.text, data);
         }, defaultErrorHandler);
     }, defaultErrorHandler);
 });
 
-function runCommand(userName, groupName, text) {
+function runCommand(userName, groupName, text, messageData = 0) {
     var words = text.split(" ");
     var commmandTag = words[1].toLowerCase();
     if (commands[commmandTag]) {
@@ -89,6 +108,7 @@ function runCommand(userName, groupName, text) {
             "userName": userName,
             "groupName": groupName,
             "bot": bot,
+            "SlackBot": SlackBot,
             "saveData": saveData,
             "params": params,
             "commands": commands,
@@ -106,7 +126,9 @@ function runCommand(userName, groupName, text) {
             "setSaveData": function (newSaveData) {
                 saveData = newSaveData;
             },
-            "runCommand": runCommand
+            "runCommand": runCommand,
+            "token": token,
+            "messageData": messageData
         }
         commands[commmandTag].run(d);
     } else {
@@ -127,46 +149,41 @@ function defaultErrorHandler(err) {
     console.error('\x1b[41m Error:', err, '\x1b[0m');
 }
 
-
-var http = require("http");
-setInterval(function() {
-    http.get("http://radiant-sea-14907.herokuapp.com");
-    bot = new SlackBot(botParams);
-}, 300000); // every 5 minutes
-
-// function choiceMysteryBox(userName, channel) {
-//     bot.postMessageToGroup(channel, userName + " has purchased a mystery box! The mystery box is: \"Tough Choice Mystery Box\". Let's see what's inside!\n1)Either gain 50 WP, or give everyone 10 WP (90 WP total).\n2) Admin: Your account has been granted wolvy-points admin rights, but don't abuse it or you'll lose it!\n3) Early Access Pass: You have been invited to #test-channel, the testing grounds for wolvy-points!\n...and remember kids, you too could earn some awesome prizes by purchasing a Mystery Box for only 40 WP!", {
-//         icon_emoji: ':rainbow_wolvy:'
-//     });
-//     // wolvy-points printAndDistribute tbartl -2 acerio -2 shesanth 16 sleepingbooty -2 hkawoosa -2 branden -2 cyan -2 seskanda -2 dbraunst -2
-// }
-
-// function theRomanticMysteryBox(userName, channel) {
-//     bot.postMessageToGroup(channel, userName + " has purchased a mystery box! The mystery box is: \"The Romantic Mystery Box\". Let's see what's inside!\n1) *Romance*: All users of the opposite gender will recieve 10 WP, courtesy of you!\n2) *Gifter*: Once per day, you can gift another user 2 WP by typing \"wolvy-points gift <username>\"\n3) *It's All Love Baby*: Users using the \"rob\" command can now only take 1 WP per day.\n4) *Early Access Pass*: You have been invited to #test-channel, the testing grounds for wolvy-points!\n...and remember kids, you too could earn some awesome prizes by purchasing a Mystery Box for only 40 WP!", {
-//         icon_emoji: ':rainbow_wolvy:'
-//     });
-//     // wolvy-points printAndDistribute sleepingbooty 10 hkawoosa 10 cyan 10 seskanda 10
-// }
-
-// function robinHoodMysteryBox(userName, channel) {
-//     bot.postMessageToGroup(channel, userName + " has purchased a mystery box! The mystery box is: \"Robinhood Mystery Box\". Let's see what's inside!\n1) *Equalizer*: All users will move 5 WP closer to 50 WP!\n2) *Robber*: Once per day, you can steal 1 WP by typing \"wolvy-points rob <username>\"\n3) *Gifter*: Once per day, you can gift another user 1 WP by typing \"wolvy-points gift <username>\"\n4) *Early Access Pass*: You have been invited to #test-channel, the testing grounds for wolvy-points!\n...and remember kids, you too could earn some awesome prizes by purchasing a Mystery Box for only 40 WP!", {
-//         icon_emoji: ':rainbow_wolvy:'
-//     });
-//     // wolvy-points printAndDistribute sleepingbooty 10 hkawoosa 10 cyan 10 seskanda 10
-// }
-
-// The Choice - Gain 50 WP For yourself, or give 10 WP to everyone (90 WP total).
-
-// Dove - Dove emoji and gift command
-
-// Robinhood - Steal and Gift
-
-
-
 // function noMysteryBox(userName, channel) {
 //     bot.postMessageToGroup(channel, userName + " has purchased a mystery box! The mystery box is: \"Null Mystery Box\". Let's see what's inside!\n1) Nothing: There are no new rewards available\n2) Instant-Rebate: You will recieve your 40 WP back soon...\n...and remember kids, you too could earn some awesome prizes by purchasing a Mystery Box for only 40 WP!", {
 //         icon_emoji: ':rainbow_wolvy:'
 //     });
 // }
 
-// Unity, Desktop, Phone, Web, Game, Controller, SinglePlayer, MultiPlayer, Networked
+
+
+// Flip Side
+// Laser Craft
+// Shape Fight
+// Sonder
+// Sonder Alpha
+// Necro Clone
+
+// FlipSide
+// Wave Dasher
+// Cloud Chaser
+// WTLDT
+// CyberSpace Doom
+// Avalanche Fiesta
+
+
+// Tumbleweed Dodgeball
+// Chrono Cursor
+// Metroid (Clone)
+
+// The CCA Project
+
+// Predictus
+// The Harmonizer
+
+// Pluggable Test Formats
+// ATFCloud.io
+
+// The Blood Book
+// tbartl.github.io
+// Wolvy Points
