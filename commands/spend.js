@@ -376,8 +376,16 @@ module.exports.run = function (data) {
         if (Math.random() > .1)
             boxList = newBoxes;
 
-        var boxIndex = Math.floor(Math.random() * boxList.length);
-        var box = boxList[boxIndex];
+        var box = undefined;
+        while (box == undefined) {
+            var boxIndex = Math.floor(Math.random() * boxList.length);
+            testBox = boxList[boxIndex];
+            if (testBox.name != data.saveData.lastBoxName) {
+                box = testBox;
+                data.saveData.lastBoxName = testBox.name;
+            }
+        }
+
         message += postMysteryBox(box, data);
         setTimeout(function () {
             box.func(data);
