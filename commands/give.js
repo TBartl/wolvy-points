@@ -17,7 +17,7 @@ module.exports.run = function (data) {
         return;
     }
 
-    var amount = data.words[3];
+    var amount = parseInt(data.words[3]);
     if (isNaN(amount))
         amount = 0;
     if (amount < 0) {

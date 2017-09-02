@@ -5,7 +5,7 @@ Wolvy :wolvy: was the original mascot for the club before the logo was changed t
 Eventually the idea came up to gamify the club using a point system to increase attendance, incentivize development, and encourage officers to do their job.
 As this gamification concept was also pretty cringey, it soon became associated with :wolvy: and thus the concept of Wolvy Points was born.
 Although it started as a joke, Wolvy Points is now a (mostly) functional system that you can use in this channel.
-To get started open an account by typing "wolvy-points openAccount".
+To get started open an account by typing "wolvy-points open-account".
 For more information, type "wolvy-points help".`
     data.postMessage(message);
 }

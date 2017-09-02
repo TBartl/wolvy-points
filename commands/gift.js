@@ -27,7 +27,7 @@ module.exports.run = function (data) {
         return;
     }
 
-    var amount = 2;
+    var amount = 2 * user.isGifter;
     targetUser.points += amount;
 
     data.postMessage(targetUserName + " recieved " + amount + " WP, thanks to " + data.userName + "! New balance: " + targetUser.points + " WP.");

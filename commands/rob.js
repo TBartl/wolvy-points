@@ -27,11 +27,22 @@ module.exports.run = function (data) {
         return;
     }
 
-    var amount = 1;
+    var amount = 1 * user.isRobber;
     user.points += amount;
     targetUser.points -= amount;
 
-    data.postMessage(data.userName + " robbed " + amount + " WP from " + targetUserName + "!\nNew balance for " + data.userName + " is " + user.points + " WP.\nNew balance for " + targetUserName + " is " + targetUser.points + " WP.");
+    var message = data.userName + " robbed " + amount + " WP from " + targetUserName + "!\nNew balance for " + data.userName + " is " + user.points + " WP.\nNew balance for " + targetUserName + " is " + targetUser.points + " WP.";
+
+    if (data.userName == "hkawoosa" && targetUserName == "tbartl") {
+        data.postMessage("Pfft, you think I'm going to reward this behaviour by changing this message everyday?");
+        setTimeout(function () {
+            message = ":angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas::angrthomas:\n" + message;
+            data.postMessage(message);
+        }, 3000);
+    } else {
+        data.postMessage(message);
+    }
+
 }
 
 function isReadyToRob(user) {

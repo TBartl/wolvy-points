@@ -15,9 +15,11 @@ module.exports.run = function (data) {
     if (targetUser.isAdmin)
         message += ", Admin";
     if (targetUser.isGifter)
-        message += ", Gifter";
+        message += ", Gifter" + ((targetUser.isGifter==1) ? "" : "(x" + targetUser.isGifter +")");
     if (targetUser.isRobber)
-        message += ", Robber";
+        message += ", Robber" + ((targetUser.isRobber==1) ? "" : "(x" + targetUser.isRobber +")");
+    if (targetUser.isImpersonator)
+        message += ", Impersonator";
     data.postMessage(message);
 }
 

@@ -14,7 +14,8 @@ var facts = [
     "Hey kids, it's time for another fun Wolvy Fact! Did you know that wolverines are solitary creatures, and need great swaths of territory to roam? Males mark their territory with their scent and only share their turf with females. Their territories can range from 40 miles (65 km) to more than 372 miles (600 km).",
     "Hey kids, it's time for another fun Wolvy Fact! Did you know that wolverines prefer colder areas because they use the snow for dens and food storage? They live in the Arctic and subarctic, in grasslands, Alpine forests, taiga, boreal forests and tundra of Europe, Asia, and in North America in the northern latitudes.",
     "Hey kids, it's time for another fun Wolvy Fact! Did you know that a wolverine has gotten tips from a rock? While preparing for his role in superhero movie \The Wolverine\", Hugh Jackman asked Dwayne \"The Rock\" Johnson for bodybuilding advice.",
-    "Hey kids, it's time for another fun Wolvy Fact! Did you know that the movie \"The Wolverine\" isn't actually about real wolverines? The film is actually about a superhero named \"Wolverine\" who has metal claws. The film currently has a 69% on rotten tomatoes, so you could say it too is bad."
+    "Hey kids, it's time for another fun Wolvy Fact! Did you know that the movie \"The Wolverine\" isn't actually about real wolverines? The film is actually about a superhero named \"Wolverine\" who has metal claws. The film currently has a 69% on rotten tomatoes, so you could say it too is bad.",
+    "Hey kids, it's time for another fun Wolvy Fact! Did you know wolverines can climb trees? While wolverines sleep, hunt and give birth on the ground, the can also climb trees just like some bears. They can do this because of their long, sharp hook-like claws, which they also use to climb sheer cliffs, icefalls and snowy peaks."
 ]
 
 
